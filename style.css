@@ -1,0 +1,106 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 20px;
+    background: linear-gradient(to right, #afc6e8, #586f89);
+}
+
+h1 {
+    color: #1e3a8a;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.subtitulo {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.student {
+    text-align: center;
+    font-style: italic;
+    color: #95a5a6;
+    margin-bottom: 30px;
+}
+
+.caja {
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px auto;
+    background: white;
+    max-width: 800px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+button {
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #1e40af;
+    transform: scale(1.05);
+}
+
+input {
+    padding: 5px;
+    margin: 5px;
+    width: 70px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+label {
+    display: inline-block;
+    margin: 10px 5px 5px 0;
+    font-weight: bold;
+}
+
+.resultado {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 6px;
+    text-align: center;
+}
+
+th {
+    background-color: #2563eb;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.solucion {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #1e3a8a;
+    background-color: #d5f4e6;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+small {
+    color: #777;
+}

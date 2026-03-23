@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Métodos Iterativos - Circuito 5 Mallas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <h1>METODOS ITERATIVOS</h1>
+    <h3 class="subtitulo">Circuito Electrico de 5 Mallas</h3>
+    <p class="student">Estudiante: Lizeth Echenique</p>
+
+    <div class="caja">
+        <h2>Sistema de ecuaciones</h2>
+        <p><strong>Ecuación 1:</strong> 10I₁ − 2I₂ − 3I₅ = b₁</p>
+        <p><strong>Ecuación 2:</strong> −2I₁ + 13I₂ − I₃ − 5I₄ = b₂</p>
+        <p><strong>Ecuación 3:</strong> − I₂ + 6I₃ − I₄ − I₅ = b₃</p>
+        <p><strong>Ecuación 4:</strong> −5I₂ − I₃ + 14I₄ − 2I₅ = b₄</p>
+        <p><strong>Ecuación 5:</strong> −3I₁ − I₃ − 2I₄ + 9I₅ = b₅</p>
+
+        <p class="solucion">
+            <strong>Solución exacta (con b = [12,0,0,0,0]):</strong><br>
+            I = [1.523, 0.478, 0.234, 0.089, 0.671]
+        </p>
+    </div>
+
+    <div class="caja">
+        <h2>Editar términos independientes (opcional)</h2>
+        <p><small>Deja los valores por defecto para usar el circuito 5×5 original</small></p>
+
+        <label>b₁:</label><input type="number" id="b1" value="12">
+        <label>b₂:</label><input type="number" id="b2" value="0">
+        <label>b₃:</label><input type="number" id="b3" value="0">
+        <label>b₄:</label><input type="number" id="b4" value="0">
+        <label>b₅:</label><input type="number" id="b5" value="0">
+
+        <p><small>Nota: Los coeficientes de la matriz están fijos para simplificar la demostración</small></p>
+    </div>
+
+    <div class="caja">
+        <h2>Calcular con los métodos</h2>
+        <button onclick="calcularGS()">Gauss-Seidel</button>
+        <button onclick="calcularSOR()">SOR (ω = 1.2)</button>
+        <button onclick="calcularGC()">Gradiente Conjugado</button>
+    </div>
+
+    <div class="caja">
+        <h2>Resultados</h2>
+        <div id="resultado"></div>
+    </div>
+
+</body>
+</html>
