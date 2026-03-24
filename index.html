@@ -1,145 +1,104 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Métodos Iterativos - Circuito 5 Mallas</title>
-
-<link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas Lineales - Métodos Iterativos</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-
 <body>
 
-<h1>METODOS ITERATIVOS</h1>
-<h3 class="subtitulo">Circuito Electrico de 5 Mallas</h3>
-<p class="student">Estudiante: Lizeth Echenique</p>
+    <div class="encabezado">
+        <h1>Resolución de Sistemas Lineales</h1>
+        <p class="subtitulo">Aplicación: Circuito de 5 Mallas | INF-375</p>
+        <p class="autor">Lizeth Echenique</p>
+    </div>
 
+    <div class="contenedor-principal">
 
-<div class="caja">
+        <!-- Panel de configuración -->
+        <section class="panel configuracion">
+            <h3 class="titulo-panel">Configurar Sistema Ax = b</h3>
+            
+            <p class="ayuda">
+                Modifique los valores de la matriz y el vector. 
+                Por defecto: circuito eléctrico 5×5.
+            </p>
 
-<h2>Sistema de ecuaciones</h2>
+            <div class="tabla-editable">
+                <table id="tablaCoef">
+                    <thead>
+                        <tr>
+                            <th>Ecuación</th>
+                            <th>x1</th><th>x2</th><th>x3</th><th>x4</th><th>x5</th>
+                            <th class="col-b">Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla"></tbody>
+                </table>
+            </div>
 
-<table>
+            <div class="controles">
+                <div class="grupo-control">
+                    <label>ω:</label>
+                    <input type="number" id="paramOmega" value="1.2" step="0.05">
+                </div>
+                <div class="grupo-control">
+                    <label>ε:</label>
+                    <input type="number" id="paramTol" value="0.000001" step="0.000001">
+                </div>
+                <div class="grupo-control">
+                    <label>Iter:</label>
+                    <input type="number" id="paramIter" value="50">
+                </div>
+                <div class="botones">
+                    <button class="btn-calcular" onclick="ejecutarCalculo()">Calcular</button>
+                    <button class="btn-limpiar" onclick="reiniciarValores()">Limpiar</button>
+                </div>
+            </div>
+            
+            <div id="mensajeAlerta"></div>
+        </section>
 
-<tr>
-<th></th>
-<th>I₁</th>
-<th>I₂</th>
-<th>I₃</th>
-<th>I₄</th>
-<th>I₅</th>
-<th>b</th>
-</tr>
+        <!-- Resultados (oculto inicialmente) -->
+        <section id="seccionResultados" class="oculto">
+            
+            <!-- Navegación entre métodos -->
+            <div class="navegacion">
+                <span class="nav-item activo" data-target="resGS" onclick="cambiarPestana('resGS')">Gauss-Seidel</span>
+                <span class="nav-item" data-target="resSOR" onclick="cambiarPestana('resSOR')">SOR</span>
+                <span class="nav-item" data-target="resCG" onclick="cambiarPestana('resCG')">Grad. Conjugado</span>
+                <span class="nav-item" data-target="resComp" onclick="cambiarPestana('resComp')">Comparar</span>
+            </div>
 
-<tr>
+            <!-- Contenido: Gauss-Seidel -->
+            <div id="resGS" class="contenido-metodo visible">
+                <div class="estadisticas" id="statsGS"></div>
+                <div class="tabla-scroll"><table id="tablaGS"></table></div>
+            </div>
 
-<th>E1</th>
+            <!-- Contenido: SOR -->
+            <div id="resSOR" class="contenido-metodo">
+                <div class="estadisticas" id="statsSOR"></div>
+                <div class="tabla-scroll"><table id="tablaSOR"></table></div>
+            </div>
 
-<td><input id="a11" value="10"></td>
-<td><input id="a12" value="-2"></td>
-<td><input id="a13" value="0"></td>
-<td><input id="a14" value="0"></td>
-<td><input id="a15" value="-3"></td>
+            <!-- Contenido: Gradiente Conjugado -->
+            <div id="resCG" class="contenido-metodo">
+                <div class="estadisticas" id="statsCG"></div>
+                <div class="tabla-scroll"><table id="tablaCG"></table></div>
+            </div>
 
-<td><input id="b1" value="12"></td>
+            <!-- Contenido: Comparativa -->
+            <div id="resComp" class="contenido-metodo">
+                <h4>Comparación de Métodos - Tarea 7</h4>
+                <table id="tablaComparativa" class="tabla-comparacion"></table>
+                <div id="analisisComparativo" class="caja-analisis"></div>
+            </div>
 
-</tr>
-
-
-<tr>
-
-<th>E2</th>
-
-<td><input id="a21" value="-2"></td>
-<td><input id="a22" value="13"></td>
-<td><input id="a23" value="-1"></td>
-<td><input id="a24" value="-5"></td>
-<td><input id="a25" value="0"></td>
-
-<td><input id="b2" value="0"></td>
-
-</tr>
-
-
-<tr>
-
-<th>E3</th>
-
-<td><input id="a31" value="0"></td>
-<td><input id="a32" value="-1"></td>
-<td><input id="a33" value="6"></td>
-<td><input id="a34" value="-1"></td>
-<td><input id="a35" value="-1"></td>
-
-<td><input id="b3" value="0"></td>
-
-</tr>
-
-
-<tr>
-
-<th>E4</th>
-
-<td><input id="a41" value="0"></td>
-<td><input id="a42" value="-5"></td>
-<td><input id="a43" value="-1"></td>
-<td><input id="a44" value="14"></td>
-<td><input id="a45" value="-2"></td>
-
-<td><input id="b4" value="0"></td>
-
-</tr>
-
-
-<tr>
-
-<th>E5</th>
-
-<td><input id="a51" value="-3"></td>
-<td><input id="a52" value="0"></td>
-<td><input id="a53" value="-1"></td>
-<td><input id="a54" value="-2"></td>
-<td><input id="a55" value="9"></td>
-
-<td><input id="b5" value="0"></td>
-
-</tr>
-
-</table>
-
-</div>
-
-
-
-<div class="caja">
-
-<h2>Calcular métodos</h2>
-
-<button onclick="calcularGS()">
-Gauss-Seidel
-</button>
-
-<button onclick="calcularSOR()">
-SOR ω=1.2
-</button>
-
-<button onclick="calcularGC()">
-Gradiente Conjugado
-</button>
-
-</div>
-
-
-
-<div class="caja">
-
-<h2>Resultados</h2>
-
-<div id="resultado"></div>
-
-</div>
-
+        </section>
+    </div>
 
 </body>
 </html>
